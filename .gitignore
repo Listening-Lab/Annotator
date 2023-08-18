@@ -1,0 +1,4 @@
+/backend/*.db
+*.db
+/classifier/
+.vscode/*

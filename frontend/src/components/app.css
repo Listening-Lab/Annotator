@@ -1,0 +1,112 @@
+/* Global styling */
+
+html{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    zoom: 100%;
+    overflow: hidden;
+
+}
+
+/* @media (prefers-color-scheme: light) { */
+    :root {
+        --background-colour: rgb(250, 250, 255);
+        --foreground-colour: rgb(245,249,252);
+        --card: rgb(252,252,255);
+        
+        --font-colour: rgba(0, 0, 0, 0.80);
+        --selected-colour: rgb(154, 188, 154);
+        --deleted-colour: rgb(224, 143, 133);
+        --hover-colour: rgb(236, 236, 240);
+
+        --shadow-low: 0px 0px 10px rgba(102, 102, 102, 0.5);
+        --shadow-low-inset: inset 0px 0px 10px rgba(0, 0, 0, 0.3);
+        --shadow-high: 0px 0px 20px rgba(100, 100, 100, 0.5);
+        --shadow-high-inset: inset 0px 0px 30px rgba(0, 0, 0, 0.2);
+
+        --highlight: rgb(103, 139, 255);
+    }
+
+body {
+    background-color: var(--background-colour);
+    font-family: "Poppins", sans-serif; 
+    margin: 0px;
+    padding: 0px;
+}
+
+button {
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* box-shadow: var(--shadow-low); */
+    border-radius: 30px;
+    border: 0px;
+    background-color: var(--card);
+
+    font-size: 45px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--font-colour);
+    transition: 0.1s ease-in-out;
+}
+
+button img {
+    /* padding: 10px; */
+    width: 20px;
+}
+
+h1 {
+    font-size: 15px;
+    color: var(--font-colour)
+}
+
+h2 {
+    font-size: 15px;
+    color: var(--font-colour)
+}
+
+h3 {
+    font-size: 14px;
+    color: var(--deleted-colour);
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    padding: 10px;
+    background-color: var(--card);
+    border: 0;
+}
+
+input:focus {
+    outline: 0;
+}
+
+select {
+    height: 40px;
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+    box-shadow: var(--shadow-low)
+}
+
+label {
+    font-size: 15px;
+    /* margin-top: 15px; */
+}
+
+hr {
+    background-color: rgb(199, 199, 199);
+    width: 90%;
+    height: 2px;
+}
+
+.wrapper {
+    margin: auto;
+    max-width: 140rem;
+}

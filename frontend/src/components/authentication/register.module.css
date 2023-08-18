@@ -1,0 +1,122 @@
+.left {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    left:0px;
+    background-color: rgb(6, 8, 31);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 400px;
+    margin-bottom: 200px;
+}
+
+.right {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.box {
+    flex-direction: column;
+    align-content: center;
+    width: 350px;
+    height: 500px;
+}
+
+button {
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: var(--shadow-low);
+    border-radius: 30px;
+    border: 0px;
+    background-color: var(--card);
+
+    font-size: 45px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--font-colour);
+    transition: 0.1s ease-in-out;
+}
+
+.submit {
+    display: flex;
+    flex-direction: row;
+}
+
+.submit .login {
+    width: 100px;
+    height: 50px;
+
+    font-size: 15px;
+    background-color: var(--background-colour);
+    box-shadow: none;
+}
+
+.submit .submit_button {
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+.submit .submit_button:hover {
+    background-color: var(--highlight);
+    color: white;
+}
+
+.form input {
+    padding: 15px;
+    transition: 0.2s ease-in-out;
+    margin-bottom: 30px;
+    font-size: 15px;
+    outline: 1px;
+} 
+
+.form input:focus {
+    height: 20px;
+    font-size: 18px;
+}
+
+a:hover {
+    color: rgb(77, 77, 77);
+}
+
+.none {
+    width: 340px;
+    background-color: none;
+    border: none;
+    box-shadow: none;
+    font-size: 14px;
+}
+
+.box .input {
+    height: 10px;
+    width: 80%;
+    border-radius: 40px;
+    border: 0;
+    box-shadow: var(--shadow-high);
+    background-color: var(--background-colour);
+    outline: none;
+    color: var(--font-colour);
+}

@@ -1,0 +1,101 @@
+/* .container {
+    position: fixed;
+    left: 0px;
+    top: 80px;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    z-index: 30;
+
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+} */
+
+
+/* Search dropdown in header */
+
+/* .search {
+    position: relative;
+    height: 80px; */
+    /* width: 400px; */
+    /* margin-right: auto; */
+    /* display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search_icon {
+    box-shadow: none;
+    border: none;
+}
+
+.search_icon img{
+    width: 30px;
+}
+
+.tags {
+    width: 300px;
+    height: 50px;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-high);
+}
+
+
+.audio_cards {
+    display: grid;
+    top: 100px;
+    grid-template-columns: auto auto auto auto;
+    column-gap: 20px;
+    width: 100%;
+    overflow-y: scroll;
+    justify-content: center;
+}
+
+.card {
+    background-color: rgb(255, 255, 255, 0.2);
+    backdrop-filter: blur(3px);
+    width: 400px; 
+    height: 400px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-low);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s ease-in-out;
+    overflow: hidden;
+} */
+
+/* .card:hover {
+    height: 400px;
+} */
+
+/* .card:hover::after {
+    content: "";
+    width: 100%;
+    height: 400px;
+    background-color: aqua;
+} */
+
+/* .row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+
+.spectrogram {
+    width: 100%;
+    transform: scale(1.0);
+}
+
+.card:hover {
+    transform: scale(1.05);
+    z-index: 20;
+} */

@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  backend:
+    build: ./backend
+    environment:  
+      API_HOST: http://localhost:8000
+      APP_SERVER_PORT: 8000
+    ports:
+      - 8000:8000
+    image:  benmcewen/listening-lab:backend
+    volumes:
+      - ./backend/database_clean.db:/backend/database.db
+      - ./backend/statics:/backend/static
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+  frontend:
+    build: ./frontend
+    ports:
+      - 3000:3000
+    image:  benmcewen/listening-lab:frontend
+    command: npm start

@@ -1,0 +1,22 @@
+.stats {
+    position: relative;
+    width: 250px;
+    /* height: 0vh; */
+
+    display: flex;    
+    flex-direction: column;
+    align-items: center;
+
+    border-right: solid 2px #c7c7c7;
+}
+
+.doughnut {
+    display: block;
+    width: 100px;
+    height: 80px;
+}
+
+.stats canvas {
+    width: 200px !important;
+    height: 200px !important;
+}

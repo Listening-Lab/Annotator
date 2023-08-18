@@ -1,0 +1,64 @@
+.panel {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    background-color: var(--background-color);
+    transition: 0.2s ease-in-out;
+    flex-grow: 1;
+}
+
+.options {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-grow: 3;
+    height: 100%;
+    max-width: 500px;
+}
+
+hr {
+    height: 1px;
+    margin: 10px;
+    border: 1px;
+}
+
+.save {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.save button {
+    margin: 10px;
+    padding: 0px;
+    width: min(100px, 40%);
+    height: 150px;
+    font-size: 20px;
+
+}
+
+.options h2 {
+    justify-content: left;
+}
+
+input {
+    height: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: row;
+}
+
+.panel select {
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--background-color);
+}

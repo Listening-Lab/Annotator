@@ -1,0 +1,100 @@
+.labelEditor {
+    /* width: 200px; */
+    height: 80%;
+    padding: none;
+    margin: none;
+    border: 0px;
+    border-left: 2px;
+    border-style: solid;
+    border-color: black;
+}
+
+.labelEditor .classes {
+    height: 100%;
+    max-height: 220px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.labelEditor .class {
+    height: 40px;
+    width: 92.5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.2s ease-in-out;
+    margin: 10px;
+    box-shadow: var(--shadow-low);
+    border-radius: 0 20px 20px 0;
+}
+
+.labelEditor label {
+    padding: 10px;
+    width: 80%;
+}
+
+.labelEditor .text {
+    padding-left: 10px;
+    width: 80%;
+    align-items: flex-end;
+}
+
+.labelEditor .class input {
+    width: 50px;
+    height: 20px;
+    /* margin: 0px; */
+    padding: 0px;
+}
+
+.labelEditor .class button {
+    background: none;
+    box-shadow: none;
+    height: 40px;
+    width: 40px;
+    margin: 0px;
+}
+
+.labelEditor button {
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 20px 20px 0;
+}
+
+.labelEditor .class button:hover img {
+    transform: scale(0.8);
+}
+
+.labelEditor .class:hover {
+    background-color: var(--hover-colour);
+}
+
+.labelEditor button:hover {
+    background-color: var(--deleted-colour);
+}
+
+.labelEditor button img {
+    transform: scale(0.8);
+}
+
+.labelEditor .inputs {
+    background-color: var(--foreground-colour);
+    box-shadow: var(--shadow-low);
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: 92.5%;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.labelEditor .inputs button {
+    background-color: var(--foreground-colour);
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    margin: 0px;
+}
+
+.labelEditor .inputs button:hover {
+    color: var(--highlight);
+}

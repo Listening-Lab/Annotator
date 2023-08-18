@@ -1,0 +1,427 @@
+.block {
+    width: flex;
+    max-width: 500px;
+    flex-grow: 1;
+    padding-right: 25px;
+}
+
+.audio_selection {
+    /* width: 100%; */
+    max-height: 100vh;
+    background-color: var(--background-colour);
+    transition: width 0.2s ease-in-out;
+}
+
+.files {
+    /* margin: 10px; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    /* overflow: hidden; */
+}
+
+.list_container {
+    display: flex;
+    height: flex;
+    max-height: 420px;
+    transition: height 0.2s ease-in-out;
+    overflow-y: scroll;
+    width: 100%;
+    justify-content: center;
+    /* box-shadow: var(--shadow-low); */
+}
+
+.list {
+    height: 100%;
+    /* scroll-snap-type: y proximity; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.files .audio {
+    position: relative;
+    display: inline-flex;
+    width: 85%;
+    height: 100px;
+    margin: 5px;
+    border-radius: 0px 20px 20px 0px;
+    box-shadow: var(--shadow-low);
+    transition: height 0.2s ease-in-out;
+    border-left: 5px solid;
+    background-color: var(--card);
+}
+
+.files .audio .dropdown{
+    width: 100%;
+    display: none;
+    transition: display 2s ease-in-out;
+    padding-bottom:20 ;
+}
+
+.files .audio:hover {
+    transform: scale(1.05,1) !important;
+}
+
+.files .audio:focus-within  {
+    height: 80px;
+}
+
+.files .audio:focus-within .dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 3;
+}
+
+.files .audio .name {
+    color: var(--font-colour);
+}
+
+.files .audio .regions {
+    /* padding-right: 20px; */
+    color: var(--font-colour);
+}
+
+.files .audio .status {
+    margin: 0px;
+    padding: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size:  15px;
+    color: var(--font-colour);
+}
+
+.files .delete img {
+    margin: 0px;
+    transform: scale(1.5);
+    justify-content: right;
+}
+
+.files .refs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 35px;
+    margin: 5px;
+    border-radius: 0px 20px 20px 0px;
+    box-shadow: var(--shadow-low);
+    border-left: 5px solid rgb(180, 45, 45);
+    background-color: var(--card);
+}
+
+.files .ref_items {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+}
+
+.files .delete_ref {
+    box-shadow: none;
+    height: 20px;
+}
+
+.button_status:hover {
+    background-color: var(--selected-colour);
+}
+
+.delete:hover {
+    background-color: var(--deleted-colour);
+}
+
+.hr {
+    height: 1px;
+    margin: 0px;
+    margin-left: 20px;
+    background-color: rgb(114, 114, 114);
+}
+
+.upload {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    /* height: 100%; */
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+    /* display: none; */
+}
+  
+::-webkit-scrollbar-thumb {
+    background: rgb(229, 232, 235);
+    border-radius: 10px;
+    z-index: 1;
+    /* display: none; */
+}
+
+::-webkit-scrollbar-corner {
+    display: none;
+}
+
+.upload .inputRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.upload .inputColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.upload .inputBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 40px;
+    border: 0;
+    box-shadow: var(--shadow-high);
+    background-color: var(--background-colour);
+    outline: none;
+    color: var(--font-colour);
+    align-items: center;
+}
+
+.upload .inputPrefix {
+    margin: 0px;
+    width: 15%;
+    padding: 20px;
+    padding-left: 30px;
+    border-radius: 40px 0px 0px 40px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload .inputFiles {
+    width: 65%;
+    margin: 0px;
+    padding: 20px;
+    border-radius: 0px;
+}
+
+.upload .upload_button {
+    height: 50px;
+    box-shadow: none;
+    align-self: flex-end;
+}
+
+.upload .upload_button:hover {
+    /* font-size: 50px; */
+    color: var(--highlight);
+}
+
+.files .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    /* padding: 10px; */
+}
+
+.files .column {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* margin-left: 50px; */
+}
+
+.files .row button {
+    width: 50px;
+    height: 50px;
+    border-radius: 40px;
+    /* margin: 10px; */
+}
+
+.files hr {
+    margin: 5px;
+}
+
+.files .filter {
+    height: 40px;
+    width: 100%;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: var(--card);
+    font-size: 15px;
+}
+
+.files .filter_button {
+    box-shadow: var(--shadow-low);
+}
+
+.files .filter_icon {
+    width: 20px;
+    height: 20px;
+    transition: 0.1s ease-in-out;
+    box-shadow: none;
+}
+
+.files .filter_icon_active {
+    width: 20px;
+    height: 20px;
+    transform: rotate(-90deg);
+    transition: 0.1s ease-in-out;
+    scale: 1.5;
+    box-shadow: none;
+}
+
+.files input {
+    justify-items: center;
+    height: 20px;
+}
+
+.checkbox {
+    display: flex;
+    background: none;
+    box-shadow: none;
+    width: 300px;
+    justify-content: flex-start;
+    align-items: center;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+.box {
+    width: 50px;
+    background: none;
+    box-shadow: none;
+    vertical-align: middle;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes loading {
+    100% {
+      background-position: -100% 0;
+    }
+  }
+
+.select_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+
+.select {
+    width: 200px;
+    font-size: 15px;
+}
+
+.select:hover {
+    background-color: var(--highlight);
+    color: white;
+}
+
+.delete_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete_selected {
+    border-radius: 50%;
+    font-size: 15px;
+}
+
+.delete_selected:hover {
+    background-color: var(--deleted-colour);
+    color: white;
+}
+
+
+.checkboxes {
+    box-shadow: none;
+    background: none;
+    border-radius: none;
+    width: 30px;
+    height: 30px;
+    z-index: 100;
+    margin: 0;
+    margin-top: 20px;
+}
+
+.uploading {
+    display: flex;
+}
+
+.uploading button.active {
+    width: 150px;
+    height: 50px;
+    font-size: 15px;
+    box-shadow: none;
+}
+
+.uploading button.inactive {
+    width: 150px;
+    height: 50px;
+    font-size: 15px;
+    box-shadow: none;
+    opacity: 0.5;
+}
+
+.pie_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pie canvas {
+    width: 50px;
+    height: 75px;
+}
+
+.loader_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-colour);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 15px;
+
+}
+
+.loader {
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid var(--highlight);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 1s linear infinite;
+  }
+   
+@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 

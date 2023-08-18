@@ -1,0 +1,26 @@
+.labelEditor {
+    position: fixed;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    background-color: rgba(255, 255, 255,0.8);
+    border-radius: 10px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.labelSelector {
+    background: none;
+    box-shadow: none;
+    font-size: 18px;
+    outline: none;
+}
+
+.addLabel {
+    height: 30px;
+    width: 30px;
+    display: flex;
+}
