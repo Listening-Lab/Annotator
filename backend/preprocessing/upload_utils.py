@@ -6,11 +6,13 @@ from pydub import AudioSegment
 from preprocessing.classifier import embeddings
 
 def save_supports(filename: str, user: schemas.User):
+    print("Saving support")
     if not os.path.exists(f'./static/{user.id}/supports/{filename[:-4]}.npy'):
         if not os.path.exists(f'./static/{user.id}/supports/'):
             os.mkdir(f'./static/{user.id}/supports/')
         e = embeddings(filename, user)
-        np.save(f'./static/{user.id}/supports/{filename[:-4]}.npy',e) 
+        print(e)
+        np.save(f'./static/{user.id}/supports/{filename[:-4]}.npy',e, allow_pickle=True) 
 
 
 def convert_mp3(file):

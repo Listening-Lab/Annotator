@@ -33,7 +33,9 @@ async def generate_supports(user: schemas.User, db: orm.Session):
         temp = []
         for support in s[label]:
             if os.path.exists(f'./static/{user.id}/supports/{support.filename[:-4]}.npy'):
-                temp.append(np.load(f'./static/{user.id}/supports/{support.filename[:-4]}.npy')[0])
+                test = np.load(f'./static/{user.id}/supports/{support.filename[:-4]}.npy', allow_pickle=True)
+                print(test)
+                temp.append(np.load(f'./static/{user.id}/supports/{support.filename[:-4]}.npy', allow_pickle=True)[0])
 
         if len(temp) > 0:
             prototype = np.mean(np.array(temp), axis=0)

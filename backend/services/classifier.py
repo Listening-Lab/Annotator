@@ -38,14 +38,14 @@ async def change_status(start: str, end: str, status: str, user: schemas.User, d
 
 async def export(user: schemas.User, db: orm.Session, start:str='2020-01-01', end:str='2200-01-01'):
     await create_validation(user, db)
-    segments = db.query(models.Segments).filter_by(owner_id=user.id).filter(models.Segments.status == 'Complete').all()
+    segments = db.query(models.Segments).filter_by(owner_id=user.id).all() # .filter(models.Segments.status == 'Complete')
     startDate = dt.datetime(*list(map(int, start.split('-'))))
     endDate = dt.datetime(*list(map(int, end.split('-'))))
 
     training_set = []
     columns = ['Filename', 'Validation', 'Label', 'Start', 'End']
 
-    MODEL_PATH = f'./classifier/{user.id}/model'
+    MODEL_PATH = f'./static/{user.id}/model'
     if not os.path.exists(MODEL_PATH):
         os.makedirs(MODEL_PATH, exist_ok=True)
 
@@ -61,7 +61,7 @@ async def export(user: schemas.User, db: orm.Session, start:str='2020-01-01', en
             training_set.append(seg)
 
     df_training = pd.DataFrame(training_set, columns=columns)
-    df_training.to_csv(f"./classifier/{user.id}/model/annotations.csv")
+    df_training.to_csv(f"./static/{user.id}/model/annotations.csv")
     return df_training.to_dict()
 
 async def create_validation(user: schemas.User, db: orm.Session):
@@ -98,7 +98,7 @@ async def classifier(user: schemas.User, db: orm.Session, background_task):
     if len(segs['Filename']) < 10:
         raise fastapi.HTTPException(status_code=405, detail="Insufficient training data")
     else:
-        MODEL_PATH = f'./classifier/{user.id}/model'
+        MODEL_PATH = f'./static/{user.id}/model'
         if not os.path.exists(MODEL_PATH):
             os.makedirs(MODEL_PATH, exist_ok=True)
 

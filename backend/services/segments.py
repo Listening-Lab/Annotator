@@ -71,7 +71,7 @@ async def delete_segments(filename, user: schemas.User, db: orm.Session):
 
     seg_path = f"./static/{user.id}/seg/"
     support_path = f"./static/{user.id}/supports/"
-    mfcc_path = f"./static/{user.id}/mfccs/"
+    # mfcc_path = f"./static/{user.id}/mfccs/"
 
     for _,_,segments in os.walk(f"./static/{user.id}/seg/"): # [seg1, seg2, ...]
         for segment in segments:
@@ -79,8 +79,8 @@ async def delete_segments(filename, user: schemas.User, db: orm.Session):
                 name = f"{segment[:-4]}.npy" # Remove .wav and add .npy
                 if os.path.exists(support_path+name):
                     os.remove(support_path+name)
-                if os.path.exists(mfcc_path+name):
-                    os.remove(mfcc_path+name)
+                # if os.path.exists(mfcc_path+name):
+                #     os.remove(mfcc_path+name)
 
                 audio_path = f"./static/{user.id}/seg/{segment}"
 

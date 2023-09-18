@@ -153,6 +153,54 @@ async def get_user_sample_rate(user: schemas.User = fastapi.Depends(user_service
 
 
 # Audio Endpoints
+
+async def parent_status(parent, user: schemas.User, db: orm.Session):
+    # This updates the status a single parent audio file if all child segments are complete
+    print("Checking parent status")
+    segments = await getChildren(parent.filename, user, db)
+    status = 0
+    condition = len(segments)
+    for segment in segments:
+        if (segment.status != "Incomplete") and (segment.status != "user"):
+            status += 1
+    
+    if status >= condition:
+        print("Complete")
+        parent.status = "Complete"
+    else:
+        print("Incomplete")
+        parent.status = "Incomplete"
+    db.add(parent)
+    db.commit()
+    db.refresh(parent)
+
+@app.get("/api/audio-status", status_code=200)
+async def status(user: schemas.User = fastapi.Depends(user_services.get_current_user), db: orm.Session = fastapi.Depends(user_services.get_db)):
+    # This endpoint updates the status of the parent audio file if all child segments are complete
+    parents = db.query(models.Audio).filter_by(owner_id=user.id).all()
+
+    for parent in parents:
+        status = 0
+        segments = await getChildren(parent.filename, user, db)
+
+        condition = len(segments)
+        for segment in segments:
+            if (segment.status != "Incomplete") and (segment.status != "user") and (segment.status != "auto"):
+                status += 1
+        
+        if status >= condition:
+            parent.status = "Complete"
+        else:
+            parent.status = "Incomplete"
+        db.add(parent)
+        db.commit()
+        db.refresh(parent)
+
+@app.get("/api/audio-count", status_code=200)
+async def count(user: schemas.User = fastapi.Depends(user_services.get_current_user), db: orm.Session = fastapi.Depends(user_services.get_db)):
+    count = await audio_services.audio_count(user, db)
+    return count
+
 @app.post("/api/upload-audio", status_code=200)
 async def upload_audio(files: list[UploadFile], 
                        user: schemas.User = fastapi.Depends(user_services.get_current_user), 
@@ -228,11 +276,8 @@ async def export_annotations(start: str, end: str, user: schemas.User = fastapi.
 # Export Model
 @app.get("/api/model", status_code=200)
 async def export_model(user: schemas.User = fastapi.Depends(user_services.get_current_user), db: orm.Session = fastapi.Depends(user_services.get_db)):
-    # annotations = await classifier.export_model(user, db)
-    directory = f"./classifier/{user.id}/model/"
-    shutil.make_archive(f"classifier/{user.id}/model", 'zip', directory)
-    return FileResponse(path=f"classifier/{user.id}/model.zip", filename="model", media_type='zip')
-
+    # Due to the size of the feature extractor, only the user model is exported
+    return FileResponse(path=f"static/{user.id}/model/usermodel.pth", filename="usermodel", media_type='pth')
 
 # Visualisations
 @app.get('/api/visualise/status', status_code=200)
@@ -346,6 +391,10 @@ async def updateSegment(filename: str, segment:schemas.SegmentCreate, user: sche
             json.dump(points, points_json)
             points_json.close()
     segment = await segments_services.update_segments(filename, segment, user, db=db)
+
+    # Check parent status
+    parent = await getParent(filename, user, db)
+    await parent_status(parent, user, db)
     return segment
 
 @app.delete('/api/seg/{filename}', status_code=200)
@@ -413,8 +462,8 @@ async def predict(segment, user: schemas.User = fastapi.Depends(user_services.ge
 
 @app.get('/api/test/export/{start}/{end}', status_code=200)
 async def export_annotation(start: str, end: str, user: schemas.User = fastapi.Depends(user_services.get_current_user), db: orm.Session = fastapi.Depends(user_services.get_db)):
-    print(start)
-    annotations = await classifier.export(user, db, start, end)
+    # print(start) 
+    annotations = await classifier.export(user, db) # , start, end # Disabled start-end time temporarily
     return {"annotations": annotations} 
     
 @app.get('/api/test/validation', status_code=200)
@@ -438,24 +487,25 @@ async def change_status(start: str, end: str, user: schemas.User = fastapi.Depen
 #     stats = await classifier.train_model(annotations, user, db)
 #     return stats
 
-@app.get('/api/export_annotations', status_code=200)
-async def export_annotations(user: schemas.User = fastapi.Depends(user_services.get_current_user), db: orm.Session = fastapi.Depends(user_services.get_db)):
-    for _,_,files in os.walk(f'./static/{user.id}/audio'):
-        data = {}
-        for file in files:
-            segments = await getChildren(file, user, db)
-            segment_valid = []
-            for segment in segments:
-                print(segment.label)
-                if segment.label == 'possum':
-                    segment_valid.append(segment)
-            data[file] = [(segment.start, segment.end) for segment in segment_valid]
-        print(data)
-        if not os.path.exists(f'./static/{user.id}/exports'):
-            os.mkdir(f'./static/{user.id}/exports')
-        with open(f'./static/{user.id}/exports/annotations.json', 'w') as outfile:
-            json.dump(data, outfile)
-            outfile.close()
+## Old annotation format
+# @app.get('/api/export_annotations', status_code=200)
+# async def export_annotations(user: schemas.User = fastapi.Depends(user_services.get_current_user), db: orm.Session = fastapi.Depends(user_services.get_db)):
+#     for _,_,files in os.walk(f'./static/{user.id}/audio'):
+#         data = {}
+#         for file in files:
+#             segments = await getChildren(file, user, db)
+#             segment_valid = []
+#             for segment in segments:
+#                 print(segment.label)
+#                 if segment.label == 'possum':
+#                     segment_valid.append(segment)
+#             data[file] = [(segment.start, segment.end) for segment in segment_valid]
+#         print(data)
+#         if not os.path.exists(f'./static/{user.id}/exports'):
+#             os.mkdir(f'./static/{user.id}/exports')
+#         with open(f'./static/{user.id}/exports/annotations.json', 'w') as outfile:
+#             json.dump(data, outfile)
+#             outfile.close()
 
 # Prototypical Learning
 @app.get('/api/prototype/get_supports', status_code=200)

@@ -81,12 +81,19 @@ def encode(labels, classes):
     return target
 
 
-def train(training_set, validation_set, classes, num_epoch=2, batch_size=2):
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+def train(user, training_set, validation_set, classes, num_epoch=2, batch_size=2):
+    device = torch.device(
+        "cuda:0"
+        if torch.cuda.is_available()
+        else "mps"
+        if torch.backends.mps.is_available()
+        else "cpu"
+    )
+    
     usermodel = UserModel(classes)
     usermodel = usermodel.to(device)
 
-    MODEL_PATH = "./preprocessing/model/model.pth"
+    MODEL_PATH = f"./static/{user.id}/model/model.pth"
     if not os.path.exists(MODEL_PATH):
         print('Generating model')
         model = ASTForAudioClassification.from_pretrained("MIT/ast-finetuned-audioset-10-10-0.4593")
@@ -190,8 +197,8 @@ def train(training_set, validation_set, classes, num_epoch=2, batch_size=2):
             best_acc = val_running_accuracy
             print('Saving models')
             # torch.save(enhance, "./models/enhance.pth")
-            torch.save(model, "./preprocessing/model/model.pth")
-            torch.save(usermodel, "./preprocessing/model/usermodel.pth")
+            torch.save(model, f"./static/{user.id}/model/model.pth")
+            torch.save(usermodel, f"./static/{user.id}/model/usermodel.pth")
         
     return train_loss, train_accuracy, val_loss, val_accuracy
 
@@ -205,12 +212,12 @@ def predict(filename, user, classes, target_rate=16000):
     feature = feature_extractor(signal, sampling_rate=target_rate, return_tensors="pt")
     feature = feature['input_values'].to(device)
 
-    MODEL_PATH = f'./preprocessing/model/model.pth'
+    MODEL_PATH = f'./static/{user.id}/model/model.pth'
 
     # Load trained models
     if os.path.exists(MODEL_PATH):
-        model = torch.load("./preprocessing/model/model.pth").to(device)
-        usermodel = torch.load("./preprocessing/model/usermodel.pth").to(device)
+        model = torch.load(f"./static/{user.id}/model/model.pth").to(device)
+        usermodel = torch.load(f"./static/{user.id}/model/usermodel.pth").to(device)
 
         embeddings = model(feature).logits
         outputs = usermodel(embeddings)
@@ -232,26 +239,33 @@ def embeddings(filename, user, target_rate=16000):
     signal = resample(signal[0])
     feature_extractor = AutoFeatureExtractor.from_pretrained("MIT/ast-finetuned-audioset-10-10-0.4593")
     feature = feature_extractor(signal, sampling_rate=target_rate, return_tensors="pt")
-    feature = feature['input_values'].to(device)
+    feature = feature['input_values'].to(device) 
 
-    MODEL_PATH = f'./preprocessing/model/model.pth'
+    MODEL_PATH = f'./static/{user.id}/model/model.pth'
 
     # Load trained models
     if os.path.exists(MODEL_PATH):
-        model = torch.load("./preprocessing/model/model.pth").to(device)
+        model = torch.load(f"./static/{user.id}/model/model.pth").to(device)
         embeddings = model(feature).logits.cpu().detach().numpy()
         return embeddings
     else:
-        None
+        # Make directory
+        os.mkdir(f'./static/{user.id}/model/')
+
+        # Create model
+        model = ASTForAudioClassification.from_pretrained("MIT/ast-finetuned-audioset-10-10-0.4593").to(device)
+        embeddings = model(feature).logits.cpu().detach().numpy()
+        torch.save(model, MODEL_PATH)
+        return embeddings
 
 
 def pipeline(user, classes):
     AUDIO_DIR = f"./static/{user.id}/seg/"
-    ANNOTATIONS = f"./classifier/{user.id}/model/annotations.csv"
+    ANNOTATIONS = f"./static/{user.id}/model/annotations.csv"
 
     training = AudioDataset(ANNOTATIONS, AUDIO_DIR, 16000, False)
     validation = AudioDataset(ANNOTATIONS, AUDIO_DIR, 16000, True)
     
-    loss, acc, val_loss, val_acc = train(training, validation, classes)
+    loss, acc, val_loss, val_acc = train(user, training, validation, classes)
 
     return loss, acc, val_loss, val_acc

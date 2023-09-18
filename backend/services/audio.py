@@ -14,9 +14,22 @@ from preprocessing.segmentation.extract_regions import get_regions as get_segs
 
 from services.classifier import prediction
 from services.prototypes import predict
-from services.segments import delete_segments
+from services.segments import delete_segments, segment_selector
 from preprocessing.upload_utils import convert_mp3
 from preprocessing.upload_utils import save_supports
+
+# async def status(user: schemas.User, db: orm.Session):
+#     parents = db.query(models.Audio).filter_by(owner_id=user.id).all()
+
+#     for parent in parents:
+#         segments = await segment_selector(parent.filename, user, db)
+#         print(segments)
+#         break
+
+async def audio_count(user: schemas.User, db: orm.Session):
+    # Return the number of audio file for user
+    count = len(db.query(models.Audio).filter_by(owner_id=user.id).filter_by(status='Complete').all())
+    return count
 
 async def add_audio(user: schemas.User, db: orm.Session, audio: schemas.AudioCreate):
     audio = models.Audio(**audio, owner_id=user.id)
@@ -211,9 +224,7 @@ async def get_refs(user: schemas.User):
     if not os.path.exists(f'./static/{user.id}/ref'): # Create user static folder if they don't exist
         os.makedirs(f'./static/{user.id}/ref', exist_ok=True)
         os.makedirs(f'./static/{user.id}/audio', exist_ok=True)
-        os.makedirs(f'./static/{user.id}/mfccs', exist_ok=True)
         os.makedirs(f'./static/{user.id}/seg', exist_ok=True)
-        os.makedirs(f'./static/{user.id}/exports', exist_ok=True)
 
     for _,_,ref_filenames in os.walk(f'./static/{user.id}/ref'):
         refs = ref_filenames
