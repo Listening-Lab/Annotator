@@ -87,6 +87,13 @@ export default function AudioSelection({audio_file, setAudio, audio_id, setAudio
   }
 
   const getAudio = async () => {
+    // Check audio status
+    const statusOptions = {
+      method: "GET",
+      headers: {Authorization: "Bearer " + token}
+    }
+    await fetch(`http://localhost:8000/api/audio-status`, statusOptions)
+
     const requestOptions = {
       method: "GET",
       headers: {Authorization: "Bearer " + token}

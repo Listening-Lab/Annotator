@@ -85,7 +85,9 @@ export default function Region({classes, setClasses, setColours}) {
             <p className={styles.text}>
               <label>{opt.label}</label>
             </p>
-            <button className={styles.button} onClick={() => deleteClass(opt)}><img src={trash_icon} alt='delete'/></button>
+            {opt.label !== 'unknown' ?
+              <button className={styles.button} onClick={() => deleteClass(opt)}><img src={trash_icon} alt='delete'/></button> :
+            null}
           </div>)}
         </div>
     </div>

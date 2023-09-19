@@ -359,7 +359,7 @@ export default function Waveform() {
         headers: {Authorization: "Bearer " + token,
                   'Content-Type': 'application/json'},
         body: JSON.stringify({"filename": editRegion.attributes.filename,
-                              "status": label === 'unknown' ? 'Incomplete' : 'Complete',
+                              "status": label !== 'unknown' ? 'Complete' : 'Incomplete' ,
                               "validation": false,
                               "start": editRegion.start,
                               "end": editRegion.end,

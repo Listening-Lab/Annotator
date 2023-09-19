@@ -178,11 +178,13 @@ export default function Export() {
 
         const response = await fetch(`http://localhost:8000/api/model`, requestOptions)
         if (response.ok){
+            console.log(response)
             const data = await response.blob()
+            console.log(data)
             const href = URL.createObjectURL(data)
             const link = document.createElement('a')
             link.href = href
-            link.download = "model.zip"
+            link.download = "model.pth"
             document.body.appendChild(link)
             link.click()
             document.body.removeChild(link)
