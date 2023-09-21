@@ -6,8 +6,10 @@ from typing import List
 from models import User
 import jwt
 from dotenv import dotenv_values
+import json
 
-config_credentials = dict(dotenv_values(".env"))
+with open('config.json', 'r') as file:
+    config_credentials = json.load(file)   #dict(dotenv_values(".env"))
 
 conf = ConnectionConfig(
     MAIL_USERNAME = config_credentials["EMAIL"],
