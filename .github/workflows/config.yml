@@ -1,0 +1,5 @@
+- name: Configurations
+env:
+  EMAIL: ${{ secrets.EMAIL }}
+  PASSWORD: ${{ secrets.PASSWORD }}
+  SECRET: ${{ secrets.SECRET }}

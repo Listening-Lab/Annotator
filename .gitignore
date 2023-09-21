@@ -2,3 +2,4 @@
 *.db
 /classifier/
 .vscode/*
+Note.md
