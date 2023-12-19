@@ -37,11 +37,15 @@ We current use a transformer-based classification model - Audio Spectrogram Tran
 ## Citation
 If you find this tool useful, please cite it (journal publication coming soon!)
 ```
-@article{McEwen2023,
-  title = "Listening Lab - A Human-in-the-Loop Approach for Annotation of Sparse Audio Events",
-  author = "{McEwen}, Ben and {Soltero}, Kaspar and {Gutschmidt}, Stefanie and {Bainbridge-Smith}, Andrew and {Atlas}, James and {Green}, Richard",
-  journal = "unpublished",
-  year = 2023
+@article{mcewen2023,
+  title={An improved computational bioacoustic monitoring approach for detecting sparse features},
+  author={McEwen, Ben J and Soltero, Kaspar and Cone, Isaac and Gutschmidt, Stefanie and Bainbridge-Smith, Andrew and Atlas, James and Green, Richard},
+  journal={The Journal of the Acoustical Society of America},
+  volume={154},
+  number={4\_supplement},
+  pages={A143--A143},
+  year={2023},
+  publisher={AIP Publishing}
 }
 ```
 
