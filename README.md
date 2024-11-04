@@ -35,27 +35,22 @@ We current use a transformer-based classification model - Audio Spectrogram Tran
 ![Annoation pipeline](/frontend/src/utils/pipeline.png)
 
 ## Citation
-If you find this tool useful, please cite it (journal publication coming soon!)
+If you find this tool useful, please cite it
 ```
-@article{mcewen2023,
-  title={An improved computational bioacoustic monitoring approach for detecting sparse features},
-  author={McEwen, Ben J and Soltero, Kaspar and Cone, Isaac and Gutschmidt, Stefanie and Bainbridge-Smith, Andrew and Atlas, James and Green, Richard},
-  journal={The Journal of the Acoustical Society of America},
-  volume={154},
-  number={4\_supplement},
-  pages={A143--A143},
-  year={2023},
-  publisher={AIP Publishing}
+@article{mcewen2024active,
+  title={Active few-shot learning for rare bioacoustic feature annotation},
+  author={McEwen, Ben and Soltero, Kaspar and Gutschmidt, Stefanie and Bainbridge-Smith, Andrew and Atlas, James and Green, Richard},
+  journal={Ecological Informatics},
+  volume={82},
+  pages={102734},
+  year={2024},
+  publisher={Elsevier}
 }
 ```
 
 ## Contribute
 Feel free to contribute to this project or adapt it for your application. 
 
-### TODO
-- [ ] Set the model to automatically update prototypes
-- [x] Scale points in point map view
-- [ ] Testing
 
 ### Bug fixes
 - Prototype removed when label removed and unknown prototype not included at inference
